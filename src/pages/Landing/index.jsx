@@ -35,11 +35,11 @@ const Landing = () => {
           <p><strong>O que deseja fazer?</strong></p>
         </Title>
         <ButtonsContainer>
-          <Service src="#">
+          <Service href="/login">
             <WorkIcon />
             Prestar Serviço
           </Service>
-          <Search src="#">
+          <Search href="/login">
             <SearchIcon />
             Buscar Serviço
           </Search>

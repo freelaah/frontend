@@ -3,6 +3,7 @@ import landing from './../../assets/images/landing.svg';
 import logo from './../../assets/images/logo.svg';
 import workIcon from './../../assets/images/workIcon.svg';
 import searchWorkIcon from './../../assets/images/searchWorkIcon.svg';
+import Login from '../Login';
 
 export const Container = styled.div`
 
@@ -122,7 +123,8 @@ export const Service = styled.a`
     }
 `;
 
-export const Search = styled.a`
+
+export const Search = styled.a` 
     background: var(--color-secondary);
 
     &:hover {
