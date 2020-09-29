@@ -54,7 +54,7 @@ const Login = () => {
                 
                 
                 <div className="loginCad">
-                    <a href="">
+                    <a href="/cadastro">
                         Não tem conta? Cadastre-se! É de graça
                     </a>
                     &nbsp; <FaHeart className="heart"/>

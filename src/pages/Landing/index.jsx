@@ -77,7 +77,7 @@ const Landing = () => {
                   <LoginIcon />
                   Login           
                 </Login>
-                <Cadastrar href="/login">
+                <Cadastrar href="/cadastro">
                   <CadIcon />
                   Cadastrar
                 </Cadastrar>

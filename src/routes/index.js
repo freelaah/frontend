@@ -4,6 +4,7 @@ import Landing from '../pages/Landing';
 import Login from '../pages/Login';
 import Professional from '../pages/Professional';
 import Client from '../pages/Client';
+import SignUp from '../pages/SignUp';
 
 function Routes() {
     return (
@@ -13,6 +14,7 @@ function Routes() {
             <Route path="/login" component={Login}/>
             <Route path="/profissional" component={Professional}/>
             <Route path="/cliente" component={Client}/>
+            <Route path="/cadastro" component={SignUp}/>
         </Switch>
         </BrowserRouter>
     )
