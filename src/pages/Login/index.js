@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { FaHeart } from 'react-icons/fa';
 import logo from "../../assets/images/logo.svg";
 import "./style.css";
 
@@ -30,7 +31,7 @@ const Login = () => {
     
     return(
         <div id="container">
-            <div className="box logo">
+            <div id="box" className="logo">
                 <img src={logo} alt="FreeLaah" />
                 <h1 className="slogan">Conectando quem busca com quem oferece!</h1>
             </div>
@@ -52,10 +53,11 @@ const Login = () => {
                 </div>
                 
                 
-                <div>
-                    Não tem conta?
-                    Cadatre-se
-                    É de graça -ícone
+                <div className="loginCad">
+                    <a href="">
+                        Não tem conta? Cadastre-se! É de graça
+                    </a>
+                    &nbsp; <FaHeart className="heart"/>
                 </div>
             </div>
         </div>
