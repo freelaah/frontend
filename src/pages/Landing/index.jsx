@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
 FaFacebook,
 FaTwitter,
@@ -7,6 +8,9 @@ FaGithub,
 FaLinkedin,
 FaYoutube,
 } from 'react-icons/fa';
+
+import { Link } from 'react-router-dom';
+
 import { 
   Container,
   LogoContainer,
@@ -55,11 +59,11 @@ const Landing = () => {
             <p><strong>O que deseja fazer?</strong></p>
           </Title>
           <ButtonsContainer>
-            <Service href="#more">
+            <Service smooth to="/#more">
               <WorkIcon />
               Prestar Serviço
             </Service>
-            <Search href="#more">
+            <Search smooth to="/#more">
               <SearchIcon />
               Buscar Serviço
             </Search>
@@ -73,11 +77,11 @@ const Landing = () => {
                 Entre e confira!! Simples assim.  Faça sua escolha, 
                 clique no botão abaixo, na opção que você desejar! </p>
               <ButtonsContainerMore>
-                <Login href="/login">
+                <Login to="/login">
                   <LoginIcon />
                   Login           
                 </Login>
-                <Cadastrar href="/cadastro">
+                <Cadastrar to="/cadastro">
                   <CadIcon />
                   Cadastrar
                 </Cadastrar>
@@ -91,19 +95,19 @@ const Landing = () => {
        <PageFooter>
          <FtSocial>
            <FtSocialList>
-            <li><a href="#"><FaFacebook /></a></li>
-            <li><a href="#"><FaTwitter /></a></li>
-            <li><a href="#"><FaInstagram /></a></li>
-            <li><a href="#"><FaGithub /></a></li>
-            <li><a href="#"><FaLinkedin /></a></li>
-            <li><a href="#"><FaYoutube /></a></li>
+            <li><Link to="#"><FaFacebook /></Link></li>
+            <li><Link to="#"><FaTwitter /></Link></li>
+            <li><Link to="#"><FaInstagram /></Link></li>
+            <li><Link to="#"><FaGithub /></Link></li>
+            <li><Link to="#"><FaLinkedin /></Link></li>
+            <li><Link to="#"><FaYoutube /></Link></li>
            </FtSocialList>
          </FtSocial>
 
          <FtLegal>
            <FtLegaList>
-            <li><a href="#">Terms &amp; Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><Link to="#">Terms &amp; Conditions</Link></li>
+            <li><Link to="#">Privacy Policy</Link></li>
             <li>&copy; 2020 Copyright FreeLaah Inc.</li>
            </FtLegaList>
          </FtLegal>

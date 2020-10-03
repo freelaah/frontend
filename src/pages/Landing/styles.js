@@ -5,6 +5,8 @@ import workIcon from './../../assets/images/workIcon.svg';
 import searchWorkIcon from './../../assets/images/searchWorkIcon.svg';
 import imgMore from './../../assets/images/imgMore.svg';
 import { FaSignInAlt, FaUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 export const Container = styled.div`
 `;
@@ -117,7 +119,7 @@ export const ButtonsContainer = styled.div`
     } 
 `;
 
-export const Service = styled.a`
+export const Service = styled(HashLink)`
     margin-right: 1.6rem;
     background: var(--color-primary);
 
@@ -127,7 +129,7 @@ export const Service = styled.a`
 `;
 
 
-export const Search = styled.a` 
+export const Search = styled(HashLink)` 
     background: var(--color-secondary);
 
     &:hover {
@@ -220,7 +222,7 @@ export const ButtonsContainerMore = styled.div`
     }
 `;
 
-export const Login = styled.a`
+export const Login = styled(Link)`
     background: var(--color-secondary);
 
     &:hover {
@@ -228,7 +230,7 @@ export const Login = styled.a`
     }
 `;
 
-export const Cadastrar = styled.a`
+export const Cadastrar = styled(Link)`
     background: var(--color-primary);
 
     &:hover {
