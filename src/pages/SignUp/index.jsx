@@ -1,60 +1,45 @@
-import React, { Component } from 'react';
-import { Container, Logo } from './styles';
+import React from 'react';
 
-export default class SignUp extends Component {
-  render() {
-    return (
-      <Container>
-        <Logo />
-        <div className='box-white'>
-          <form>
-            <h3>Criar Conta</h3>
+import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import logo from "../../assets/images/logo.svg";
+import "./styles.css";
 
-            <div className='form-group'>
-              <label>Nome</label>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Digite seu nome'
-              />
-            </div>
+const SignUp = () => {    
+  return(
+      <div id="container">
+          <div id="box" className="logo">
+              <img src={logo} alt="FreeLaah" />
+              <h1 className="slogan">Conectando quem busca com quem oferece!</h1>
+          </div>
 
-            <div className='form-group'>
-              <label>Sobrenome</label>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Digite seu Sobrenome'
-              />
-            </div>
+          <div className="cadastro"> 
+              <div className="cadastro-area">
+                  <h1 className="cadastro-title">Fazer cadastro</h1>
+                  <input type="text" placeholder="Nome"></input>
+                  <div className="cadastro-bloco">
+                    <input type="text" placeholder="Cpf"></input>
+                    <input type="number" placeholder="Idade"></input>
+                  </div>   
+                  <input type="text" placeholder="E-mail"></input>
+                  <input type="text" placeholder="Senha"></input>
+                  <div>
+                      <button>Cadastrar</button>                        
+                  </div>    
+              </div>
+              
+              
+              <div className="loginCad">
+                  <Link to="/login">
+                      Já tem conta? Realize o login! É de graça
+                  </Link>
+                  &nbsp; <FaHeart className="heart"/>
+              </div>
+          </div>
+      </div>
+  )
 
-            <div className='form-group'>
-              <label>Endereço de Email</label>
-              <input
-                type='email'
-                className='form-control'
-                placeholder='Digite seu email'
-              />
-            </div>
-
-            <div className='form-group'>
-              <label>Senha</label>
-              <input
-                type='password'
-                className='form-control'
-                placeholder='Digite sua senha'
-              />
-            </div>
-
-            <button type='submit' className='btn  btn-block'>
-              Sign Up
-            </button>
-            <p className='forgot-password text-right'>
-              Ja possui cadastro? <a href='/'>Logar aqui</a>
-            </p>
-          </form>
-        </div>
-      </Container>
-    );
-  }
 }
+
+export default SignUp;
+

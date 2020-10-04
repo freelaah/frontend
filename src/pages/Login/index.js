@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FaHeart } from 'react-icons/fa';
 import logo from "../../assets/images/logo.svg";
@@ -40,7 +40,7 @@ const Login = () => {
                 <div className="login-area">
                     <h1 className="login-title">Fazer login</h1>
                     <input value={email} type="text" placeholder="E-mail" onChange={ text => {setEmail(text.target.value);} }></input>
-                    <input value={senha} type="text" placeholder="senha" onChange={ text => {setSenha(text.target.value);} }></input>
+                    <input value={senha} type="text" placeholder="Senha" onChange={ text => {setSenha(text.target.value);} }></input>
                     <div className="login-forgot">
                         <ul>
                             <li>Lembrar-me</li>                                
@@ -54,9 +54,9 @@ const Login = () => {
                 
                 
                 <div className="loginCad">
-                    <a href="/cadastro">
+                    <Link to="/cadastro">
                         Não tem conta? Cadastre-se! É de graça
-                    </a>
+                    </Link>
                     &nbsp; <FaHeart className="heart"/>
                 </div>
             </div>
