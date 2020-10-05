@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from "../../assets/images/logo.svg";
 import "./styles.css";
@@ -9,11 +9,16 @@ const SignUp = () => {
   return(
       <div id="container">
           <div id="box" className="logo">
-              <img src={logo} alt="FreeLaah" />
-              <h1 className="slogan">Conectando quem busca com quem oferece!</h1>
+            <img src={logo} alt="FreeLaah" />
+            <h1 className="slogan">Conectando quem busca com quem oferece!</h1> 
           </div>
 
           <div className="cadastro"> 
+              <div className="seta">
+                <Link to="/">
+                  <FaArrowLeft />
+                </Link>
+              </div>
               <div className="cadastro-area">
                   <h1 className="cadastro-title">Fazer cadastro</h1>
                   <input type="text" placeholder="Nome"></input>
@@ -21,6 +26,11 @@ const SignUp = () => {
                     <input type="text" placeholder="Cpf"></input>
                     <input type="number" placeholder="Idade"></input>
                   </div>   
+                  <select defaultValue="" id="perfil">
+                    <option value="" disabled hidden>Selecione um Perfil</option>
+                    <option value="prestar">Prestar Serviço</option>
+                    <option value="buscar">Buscar Serviço</option>
+                  </select>
                   <input type="text" placeholder="E-mail"></input>
                   <input type="text" placeholder="Senha"></input>
                   <div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { FaHeart } from 'react-icons/fa';
+import { FaArrowLeft, FaHeart } from 'react-icons/fa';
 import logo from "../../assets/images/logo.svg";
 import "./style.css";
 
@@ -37,6 +37,11 @@ const Login = () => {
             </div>
 
             <div className="login"> 
+                <div className="seta">
+                    <Link to="/">
+                        <FaArrowLeft />
+                    </Link>
+                </div>
                 <div className="login-area">
                     <h1 className="login-title">Fazer login</h1>
                     <input value={email} type="text" placeholder="E-mail" onChange={ text => {setEmail(text.target.value);} }></input>

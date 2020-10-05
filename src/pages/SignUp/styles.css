@@ -10,7 +10,6 @@ body {
 }
 
 #box{
-    
     width: 50vw;
     height: 100vh;
     background: #18C29C;
@@ -28,7 +27,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    position: relative;
 }
 
 .cadastro-bloco {
@@ -48,7 +47,7 @@ body {
     padding: 10px;
     margin: 5px;
     width: 352px;
-    height: 60%;
+    height: 70%;
 }
 
 .slogan{
@@ -79,7 +78,7 @@ body {
     color: #4f5b63;
 }
 
-input {
+input, select {
     width: 100%;
     height: 5.6rem;
     margin-top: 0.8rem;
@@ -118,4 +117,20 @@ button:hover {
     color: var(--color-secondary-dark);
     width: 15px;
     height: 15px;
+}
+
+.seta {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+.seta a {
+    text-decoration: none;
+}
+
+.seta a svg {
+    width: 20px;
+    height: 20px;
+    color: black;
 }
