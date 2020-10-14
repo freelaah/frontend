@@ -10,7 +10,7 @@ const SignUp = () => {
       <div id="container">
           <div id="box" className="logo">
             <img src={logo} alt="FreeLaah" />
-            <h1 className="slogan">Conectando quem busca com quem oferece!</h1> 
+            <h1 className="slogan">Conectando quem busca com quem oferece!!</h1> 
           </div>
 
           <div className="cadastro"> 
