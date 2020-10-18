@@ -5,27 +5,49 @@ import { FaArrowLeft, FaHeart } from 'react-icons/fa';
 import logo from "../../assets/images/logo.svg";
 import "./style.css";
 
+import api from '../../services/api';
+
+import jwt from 'jsonwebtoken'
 
 const Login = () => {
 
-    const [ email, setEmail ] = useState('');
-    const [ senha, setSenha ] = useState('');
+    const [login, setLogin] = useState("");
+    const [password, setPassword ] = useState('');
+    const [invalidPassword, setInvalidPassword] = useState(false);
 
     const history = useHistory();
     
-
     const routeChange = (name) => {
         let path = `/`.concat(name);
         history.push(path);
     }
 
-    function teste(login, senha){
-        if(login === validacaoLogin.loginCorreto && senha === validacaoLogin.senhaCorreta){
-            //alert("Você está autorizado")
-            routeChange(validacaoLogin.perfil)
-        }else{
-            alert("Você não está autorizado")
-        }
+    async function loginAutorization(login, password){
+        console.log(">>>>> chamou")
+        let isAutorization = false;
+
+        try {
+            console.log(login, password)
+            const response = await api.post("/users/login", { login, password });
+            
+            console.log(">>>>>>" + response);
+
+            if(response.data.autorization == true){                
+                isAutorization = true;       
+            }
+
+         }catch(e){
+             console.log("erro " + e);
+         }
+
+         
+         if(isAutorization) {
+            history.push('/profissional');
+         } else {
+            console.log(">>>> nao")
+            setInvalidPassword(true);
+         }
+
     }
 
     
@@ -44,8 +66,8 @@ const Login = () => {
                 </div>
                 <div className="login-area">
                     <h1 className="login-title">Fazer login</h1>
-                    <input value={email} type="text" placeholder="E-mail" onChange={ text => {setEmail(text.target.value);} }></input>
-                    <input value={senha} type="text" placeholder="Senha" onChange={ text => {setSenha(text.target.value);} }></input>
+                    <input value={login} type="text" placeholder="E-mail" onChange={ text => {setLogin(text.target.value);} }></input>
+                    <input value={password} type="text" placeholder="Senha" onChange={ text => {setPassword(text.target.value);} }></input>
                     <div className="login-forgot">
                         <ul>
                             <li>Lembrar-me</li>                                
@@ -53,8 +75,18 @@ const Login = () => {
                         </ul>
                     </div>
                     <div>
-                        <button onClick={ evnt => teste(email, senha)}>Entrar</button>                        
-                    </div>    
+
+                    {
+                        (invalidPassword == true) &&  <div className='invalidPassword'>Senha ou usuário não cadastrado.</div>
+                    }
+                    
+                    </div>
+
+                    <div>
+                        <button onClick={ evnt => loginAutorization(login, password)}>Entrar</button>                        
+                    </div>
+                    
+                        
                 </div>
                 
                 
@@ -67,14 +99,6 @@ const Login = () => {
             </div>
         </div>
     )
-
 }
 
 export default Login;
-
-let validacaoLogin = {
-    "loginCorreto" : 'teste',
-    "senhaCorreta" : '123',
-    "perfil" : 'profissional'
-};
-
