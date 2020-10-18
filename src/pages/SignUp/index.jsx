@@ -1,11 +1,62 @@
 import React from 'react';
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FaHeart, FaArrowLeft } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import logo from "../../assets/images/logo.svg";
 import "./styles.css";
 
 const SignUp = () => {    
+
+  const [nome, setNome] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [idade, setIdade] = useState('');
+  const [perfil, setPerfil] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [instrucaoSenha, setInstrucaoSenha] = useState('');
+  const history = useHistory();
+
+  const routeChange = (name) => {
+    let path = `/`.concat(name);
+    history.pushState(path); //Joga o usuario para esse path
+  }
+
+  
+  async function sendInput(e){
+    
+    e.preventDefault();
+
+    console.log(">>> senInput")
+
+    try {
+      
+      // const retorno = await fetch('http://localhost:5000/users/register/', {
+      //     method: 'POST',
+      //     headers: {
+      //         'Accept': 'application/json',
+      //         'Content-Type': 'application/json',
+      //         'Access-Control-Allow-Origin': '*'
+      //     },
+      //     body: JSON.stringify({login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf })
+      // }).then(function(res){ return res.json(); });
+
+      //let json = await retorno.json();
+     // console.log(json);
+
+   }catch(error){
+       console.log("erro " + error);
+   }
+
+   console.log("fim >>")
+
+
+  }
+
+  function changeType(){
+
+  }
+
   return(
       <div id="container">
           <div id="box" className="logo">
@@ -21,20 +72,23 @@ const SignUp = () => {
               </div>
               <div className="cadastro-area">
                   <h1 className="cadastro-title">Fazer cadastro</h1>
-                  <input type="text" placeholder="Nome"></input>
+                  <input type="text" placeholder="Nome" value={nome} onChange={(text) => setNome(text.target.value)}></input>
                   <div className="cadastro-bloco">
-                    <input type="text" placeholder="Cpf"></input>
-                    <input type="number" placeholder="Idade"></input>
+                    <input type="text" placeholder="Cpf" value={cpf} onChange={(text) => setCPF(text.target.value)}></input>
+                    <input type="number" placeholder="Idade" value={idade} onChange={(text) => setIdade(text.target.value)}></input>
                   </div>   
-                  <select defaultValue="" id="perfil">
+                  <select defaultValue="" id="perfil" onChange={(evt) => changeType(evt.target.value) }>
                     <option value="" disabled hidden>Selecione um Perfil</option>
                     <option value="prestar">Prestar Serviço</option>
                     <option value="buscar">Buscar Serviço</option>
                   </select>
-                  <input type="text" placeholder="E-mail"></input>
-                  <input type="text" placeholder="Senha"></input>
+                  <input type="text" placeholder="E-mail" value={email} onChange={(text) => setEmail(text.target.value)}></input>
+                  <input type="text" placeholder="Senha" value={senha} onChange={(text) => setSenha(text.target.value)}></input>
                   <div>
-                      <button>Cadastrar</button>                        
+                      <button onClick={(e) => sendInput(e) }  >Cadastrar</button>                        
+                  </div>
+                  <div>
+                      {instrucaoSenha}
                   </div>    
               </div>
               

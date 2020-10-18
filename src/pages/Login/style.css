@@ -149,3 +149,11 @@ button:hover {
     height: 20px;
     color: black;
 }
+
+.invalidPassword {
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    color: red;
+    font: 700 1.6rem Archivo;
+}
