@@ -23,14 +23,11 @@ const Login = () => {
     }
 
     async function loginAutorization(login, password){
-        console.log(">>>>> chamou")
         let isAutorization = false;
 
         try {
             console.log(login, password)
-            const response = await api.post("/users/login", { login, password });
-            
-            console.log(">>>>>>" + response);
+            const response = await api.post("/users/login", {login, password});
 
             if(response.data.autorization == true){                
                 isAutorization = true;       
@@ -44,7 +41,6 @@ const Login = () => {
          if(isAutorization) {
             history.push('/profissional');
          } else {
-            console.log(">>>> nao")
             setInvalidPassword(true);
          }
 
