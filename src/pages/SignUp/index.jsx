@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { FaHeart, FaArrowLeft } from 'react-icons/fa';
+
+import api from '../../services/api';
+
+
 import logo from "../../assets/images/logo.svg";
 import "./styles.css";
 
@@ -17,6 +21,8 @@ const SignUp = () => {
   const [instrucaoSenha, setInstrucaoSenha] = useState('');
   const history = useHistory();
 
+
+
   const routeChange = (name) => {
     let path = `/`.concat(name);
     history.pushState(path); //Joga o usuario para esse path
@@ -25,24 +31,14 @@ const SignUp = () => {
   
   async function sendInput(e){
     
-    e.preventDefault();
-
-    console.log(">>> senInput")
+    e.preventDefault(); 
+    console.log(">>> senInput");
+    const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf };
+    console.log(">>>", data);
 
     try {
       
-      // const retorno = await fetch('http://localhost:5000/users/register/', {
-      //     method: 'POST',
-      //     headers: {
-      //         'Accept': 'application/json',
-      //         'Content-Type': 'application/json',
-      //         'Access-Control-Allow-Origin': '*'
-      //     },
-      //     body: JSON.stringify({login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf })
-      // }).then(function(res){ return res.json(); });
-
-      //let json = await retorno.json();
-     // console.log(json);
+      const response = await api.post("/users/register", data);
 
    }catch(error){
        console.log("erro " + error);
@@ -50,11 +46,10 @@ const SignUp = () => {
 
    console.log("fim >>")
 
-
   }
 
-  function changeType(){
-
+  function changeType(value){
+    setPerfil(value);
   }
 
   return(
