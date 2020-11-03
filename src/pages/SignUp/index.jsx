@@ -74,8 +74,8 @@ const SignUp = () => {
                   </div>   
                   <select defaultValue="" id="perfil" onChange={(evt) => changeType(evt.target.value) }>
                     <option value="" disabled hidden>Selecione um Perfil</option>
-                    <option value="prestar">Prestar Serviço</option>
-                    <option value="buscar">Buscar Serviço</option>
+                    <option value="profissional">Prestar Serviço</option>
+                    <option value="cliente">Buscar Serviço</option>
                   </select>
                   <input type="text" placeholder="E-mail" value={email} onChange={(text) => setEmail(text.target.value)}></input>
                   <input type="text" placeholder="Senha" value={senha} onChange={(text) => setSenha(text.target.value)}></input>

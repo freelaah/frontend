@@ -7,8 +7,6 @@ import "./style.css";
 
 import api from '../../services/api';
 
-import jwt from 'jsonwebtoken'
-
 const Login = () => {
 
     const [login, setLogin] = useState("");
@@ -24,22 +22,24 @@ const Login = () => {
 
     async function loginAutorization(login, password){
         let isAutorization = false;
+        let json = null;
 
         try {
-            console.log(login, password)
-            const response = await api.post("/users/login", {login, password});
+            json = await api.post("/users/login", {login, password});
 
-            if(response.data.autorization == true){                
-                isAutorization = true;       
+            if(json.data.authorization == true && json.data.token !== null){                   
+                //salva token
+                localStorage.setItem('token', json.data.token);
+                isAutorization = true;      
             }
 
          }catch(e){
              console.log("erro " + e);
          }
-
          
          if(isAutorization) {
-            history.push('/profissional');
+             //cliente e profissional
+            history.push(json.data.type);
          } else {
             setInvalidPassword(true);
          }
