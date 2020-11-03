@@ -1,0 +1,69 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-primary);
+    width: 100vw;
+    height: 340px;
+}
+
+.header .navbar {
+    width: 100vw;
+    height: 100px;
+    display: flex;
+}
+
+.header .text {
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .navbar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+} 
+
+.header .navbar .voltar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
+
+.header .navbar .voltar .btnVoltar {
+    transition: opacity 0.2s;
+}
+
+.header .navbar .voltar .btnVoltar:hover {
+    opacity: 0.6;
+}
+
+.header .navbar .logo .btnLogo {
+    transition: opacity 0.2s;
+}
+
+.header .navbar .logo .btnLogo:hover {
+    opacity: 0.6;
+}
+
+.header .navbar .logo .btnLogo > img {
+    height: 16px;
+    width: 100px;
+}
+
+.header .text strong {
+    font: 700 30px Archivo;
+    color: var(--color-title-in-primary);
+}
+
+.header .text p {
+    max-width: 30px;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-text-in-primary);
+    margin-top: 24px;
+}

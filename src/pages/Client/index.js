@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 
 const Client = () => {
     return (
-        <h1>Página Cliente</h1>
+        <Header title="Estes são os FreeLaah disponíveis." />
     )
 }
 
