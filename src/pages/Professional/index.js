@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ImageUploader from 'react-images-upload';
+import Header from '../../components/Header';
 
 
 const Professional = () => {
@@ -36,6 +37,7 @@ const Professional = () => {
 
     return (
         <div>
+            <Header title="Meus Serviços" />
             <h1>Página Profissional: Você está logado no sistema</h1>
             <ImageUploader
                 withIcon={true}
