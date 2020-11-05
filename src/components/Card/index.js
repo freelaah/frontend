@@ -2,11 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import landing from './../../assets/images/pp.jpg';
 import imgMore from './../../assets/images/imgMore.svg';
-import whatsappIcon from './../../assets/images/whatsapp.svg';
 import './styles.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Card = () => {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+
+  today = yyyy+'-'+mm+'-'+dd;
+
   return (
     <article className="teacher-item">
       <header>
@@ -28,10 +40,13 @@ const Card = () => {
               Preço/hora
               <strong>R$ 90.00</strong>
           </p>
-          <Link to="#" type="button" target="_blank" rel="noopener noreferrer">
-              <img src={whatsappIcon} alt="WhatsApp"/>
-              Entrar em contato
-          </Link>
+          <div className="inputBlock">
+            <label htmlFor="dataServico">Data do serviço:</label>
+            <input id="dataServico" name="dataServico" type="date" className="date"min={today}/>
+          </div>
+          <button type="button">
+              Agendar
+          </button>
       </footer>
     </article>
   );
