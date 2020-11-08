@@ -30,7 +30,7 @@ const Client = () => {
         <>
             <Header title="Estes são os FreeLaah disponíveis." />
             <div className="agendaButton">
-                <Link to="#" className="agenda">
+                <Link to="/cliente/servicosAgendados" className="agenda">
                     <img src={agendaImg}/>
                     Serviços Agendados
                 </Link>

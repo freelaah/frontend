@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import landing from './../../assets/images/pp.jpg';
 import imgMore from './../../assets/images/imgMore.svg';
 import './styles.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Card = () => {
   var today = new Date();
