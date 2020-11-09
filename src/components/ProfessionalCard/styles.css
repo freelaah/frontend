@@ -88,13 +88,18 @@
     margin-left: 5px;
     display: block;
   }
+
+  .teacher-item footer .buttons {
+    display: flex;
+    width: 60%;
+    justify-content: flex-end;
+    align-items: center;
+  }
   
   .teacher-item footer button {
     margin: 0;
-    width: 130px;
     height: 56px;
-    background: var(--color-secondary);
-    color: var(--color-button-text);
+    width: 60px;
     border: 0;
     border-radius: 8px;
     cursor: pointer;
@@ -105,25 +110,27 @@
     transition: 0.2s;
     text-decoration: none;
   }
-  
-  .teacher-item footer button:hover {
-    background: var(--color-secondary-dark);
+
+  .teacher-item footer .editar {
+    background: var(--color-primaryTree);
+    color: var(--color-button-text);
+    margin-right: 5px;
   }
 
-  /* .teacher-item footer button {
-    width: 245px;
-    font-size: 26px;
-    justify-content: center;
-  }  */
+  .teacher-item footer .editar:hover {
+    background: var(--color-primaryTree-dark);
+  }
 
-  input.date{
-    border-radius:10px;
-    width: 180px;
-    margin: 0;
+  .teacher-item footer .excluir {
+    background: var(--color-cancel);
+    color: var(--color-button-text);
+  }
+
+  .teacher-item footer .excluir:hover {
+    background: #c91d1d;
   }
 
   .teacher-item footer button img {
-    margin-right: 16px;
-    height: 26px;
-    width: 26px;
+    height: 15px;
+    width: 15px;
   }

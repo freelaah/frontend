@@ -69,7 +69,7 @@ const CalendarCard = ({profissional, cliente}) => {
             <label htmlFor="dataServico">Data do serviço:</label>
             <input id="dataServico" name="dataServico" type="date" className="date" />
           </div>
-          <button type="button">
+          <button type="button" className="cancelar">
               Cancelar
           </button>
       </footer>

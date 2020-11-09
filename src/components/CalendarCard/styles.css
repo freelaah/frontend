@@ -56,7 +56,7 @@
     margin: 0;
     width: 130px;
     height: 56px;
-    background: var(--color-primary);
+    background: var(--color-primaryTwo);
     color: var(--color-button-text);
     border: 0;
     border-radius: 8px;
@@ -70,7 +70,7 @@
   }
 
   .teacher-item header a:hover {
-    background: var(--color-primary-dark);
+    background: var(--color-primaryTwo-dark);
   }
 
   .teacher-item header a img {
@@ -143,7 +143,7 @@
     display: block;
   }
   
-  .teacher-item footer button {
+  .teacher-item footer .cancelar {
     margin: 0;
     width: 130px;
     height: 56px;
@@ -160,7 +160,7 @@
     text-decoration: none;
   }
   
-  .teacher-item footer button:hover {
+  .teacher-item footer .cancelar:hover {
     background: #c91d1d;
   }
 
@@ -176,7 +176,7 @@
     margin: 0;
   }
 
-  .teacher-item footer button img {
+  .teacher-item footer .cancelar img {
     margin-right: 16px;
     height: 26px;
     width: 26px;

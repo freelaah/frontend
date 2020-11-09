@@ -1,54 +1,28 @@
-import React, {useState} from 'react';
-import ImageUploader from 'react-images-upload';
-import Header from '../../components/Header';
-
+import React from 'react';
+import Header from './../../components/Header';
+import { Link } from 'react-router-dom';
+import ProfessionalCard from './../../components/ProfessionalCard';
+import addImg from './../../assets/images/add.svg';
+import agendaImg from './../../assets/images/agenda.svg';
+import './styles.css';
 
 const Professional = () => {
-
-    const formData = new FormData();
-    const [pictures, setPictures] = useState([]);
-    
-    //image, descricao, categoria
-    async function cadastroCategoria() {
-        formData.append('image', pictures[0]);
-        formData.append('descricao', 'teste');
-        formData.append('categoria', 'categoria teste');
-
-
-        try{
-            console.log('passou aqui');
-            let options = {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin' : '*'
-                },
-                body: formData
-            }
-            delete options.headers['Content-Type'];
-            let retorno = await fetch('http://localhos:5000/services', options);
-        } catch(error) { //em caso de erro, faça um print do erro.
-            console.log(error);
-        }
-    }
-    
-    const onDrop = picture => {
-         setPictures(picture);
-    } 
-
-    return (
-        <div>
-            <Header title="Meus Serviços" />
-            <h1>Página Profissional: Você está logado no sistema</h1>
-            <ImageUploader
-                withIcon={true}
-                buttonText='Choose images'
-                onChange={onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />   
-            <button onClick={cadastroCategoria}>Cadastrar Categoria</button>
-        </div>
-    )
-}
+  return (
+    <>
+      <Header title="Meu Serviço" />
+      <div className="acoesButton">
+          <Link to="/profissional/servico" className="criar">
+              <img src={addImg}/>
+              Criar Serviço
+          </Link>
+          <Link to="/profissional/servicosAgendados" className="agenda">
+              <img src={agendaImg}/>
+              Serviços Agendados
+          </Link>
+      </div>
+      <ProfessionalCard />
+    </>
+  );
+};
 
 export default Professional;

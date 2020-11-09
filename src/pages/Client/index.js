@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../../components/Card';
+import ClientCard from '../../components/ClientCard';
 import Header from '../../components/Header';
 import agendaImg from './../../assets/images/agenda.svg';
 import pesquisaImg from './../../assets/images/pesquisa.svg';
@@ -30,7 +30,7 @@ const Client = () => {
         <>
             <Header title="Estes são os FreeLaah disponíveis." />
             <div className="agendaButton">
-                <Link to="/cliente/servicosAgendados" className="agenda">
+                <Link to="/cliente/servicosAgendados" id="agenda">
                     <img src={agendaImg}/>
                     Serviços Agendados
                 </Link>
@@ -51,7 +51,7 @@ const Client = () => {
                     Buscar
                 </button>
             </div>
-            <Card />
+            <ClientCard />
         </>
     )
 }
