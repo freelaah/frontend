@@ -36,6 +36,9 @@
 
 .header .navbar .voltar .btnVoltar {
     transition: opacity 0.2s;
+    text-decoration: none;
+    font: 100 15px Archivo;
+    color: var(--color-title-in-primary);
 }
 
 .header .navbar .voltar .btnVoltar:hover {

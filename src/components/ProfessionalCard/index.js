@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import landing from './../../assets/images/pp.jpg';
 import imgMore from './../../assets/images/imgMore.svg';
-import whatsappIcon from './../../assets/images/whatsapp.svg';
+import editarImg from './../../assets/images/editar.svg';
+import excluirImg from './../../assets/images/excluir.svg';
 import './styles.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const Card = () => {
+const ProfessionalCard = () => {
+
   return (
     <article className="teacher-item">
       <header>
@@ -28,13 +28,17 @@ const Card = () => {
               Preço/hora
               <strong>R$ 90.00</strong>
           </p>
-          <Link to="#" type="button" target="_blank" rel="noopener noreferrer">
-              <img src={whatsappIcon} alt="WhatsApp"/>
-              Entrar em contato
-          </Link>
+          <div className="buttons">
+            <button type="button" className="editar">
+              <img src={editarImg} />
+            </button>
+            <button type="button" className="excluir">
+              <img src={excluirImg} />
+            </button>
+          </div>
       </footer>
     </article>
   );
 }
 
-export default Card;
+export default ProfessionalCard;

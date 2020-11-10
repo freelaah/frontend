@@ -7,6 +7,15 @@
     --color-primary: #18C29C;
     --color-primary-dark: #16b693;
     --color-primary-darker: #149f81;
+    --color-primaryTwo: #04D361;
+    --color-primaryTwo-dark: #04c85c;
+    --color-primaryTwo-darker: #04af51;
+    --color-primaryTree: #1893C2;
+    --color-primaryTree-dark: #1688b6;
+    --color-primaryTree-darker: #14779f;
+    --color-cancel: #E33D3D;
+    --color-cancel-dark: ##df2020;
+    --color-cancel-darker: ##c91d1d;
     --color-secondary: #DA39E6;
     --color-secondary-dark: #c019cc;
     --color-title-in-primary: #FFFFFF;
