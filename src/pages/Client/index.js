@@ -8,6 +8,7 @@ const Client = () => {
         <>
             <Header title="Estes são os FreeLaah disponíveis." />
             <Card />
+            <Card />
         </>
     )
 }
