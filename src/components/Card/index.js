@@ -13,11 +13,11 @@ const Card = () => {
           <img src={landing} alt="nome professor"/>
           <div>
               <strong>Sillas Vinícius</strong>
-              <span>Designer de interiores</span>
+              <span>Designer de interface</span>
           </div>
       </header>
 
-      <p align="center">fgffgdfgdfgdfgdfsfffffffffffffffffffffffffffffffsdfdsfsdfsdf</p>
+      <p align="center">Criacao de páginas HTML</p>
 
       <div className="wrapper-img">
         <img src={imgMore} alt="sobre"/>

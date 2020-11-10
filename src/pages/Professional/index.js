@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ImageUploader from 'react-images-upload';
 import Header from '../../components/Header';
+
+import SelectCategories from '../../components/SelectCategories'
 
 import api from '../../services/api';
 
@@ -13,7 +15,6 @@ const Professional = () => {
     const [descricao, setDescricao] = useState('');
     const [categoria, setCategoria] = useState('');
   
-    
     //image, descricao, categoria
     async function cadastroCategoria() {
         formData.append('image', pictures[0]);
@@ -43,15 +44,21 @@ const Professional = () => {
          setPictures(picture);
     } 
 
+    function rInformacoes(item){
+        console.log(">>>> fornecer informacoes", item)
+        setCategoria(item)
+    }
+   
     return (
         <div>
             <Header title="Meus Serviços" />
             <h1>Página Profissional: Você está logado no sistema</h1>
 
-
             <input type="text" placeholder="Descricao" value={descricao} onChange={(text) => setDescricao(text.target.value)}></input>
-            <input type="text" placeholder="Categoria" value={categoria} onChange={(text) => setCategoria(text.target.value)}></input>
-
+            <label>Categoria
+                <SelectCategories onChange={(text) => setCategoria(text)}/>
+                {categoria}
+            </label>
             <ImageUploader
                 withIcon={true}
                 buttonText='Escolha uma imagem'
