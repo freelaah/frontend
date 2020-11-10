@@ -32,19 +32,14 @@ const SignUp = () => {
   async function sendInput(e){
     
     e.preventDefault(); 
-    console.log(">>> senInput");
+
     const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf };
-    console.log(">>>", data);
 
     try {
-      
       const response = await api.post("/users/register", data);
-
    }catch(error){
        console.log("erro " + error);
    }
-
-   console.log("fim >>")
 
   }
 
