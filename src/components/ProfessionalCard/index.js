@@ -5,28 +5,28 @@ import editarImg from './../../assets/images/editar.svg';
 import excluirImg from './../../assets/images/excluir.svg';
 import './styles.css';
 
-const ProfessionalCard = () => {
-
+const ProfessionalCard = (props) => {
+  
   return (
     <article className="teacher-item">
       <header>
-          <img src={landing} alt="nome professor"/>
+          <img src={props.img_profile} alt={props.nome}/>
           <div>
-              <strong>Sillas Vinícius</strong>
-              <span>Designer de interface</span>
+              <strong>{props.nome}</strong>
+              <span>{props.categoria}</span>
           </div>
       </header>
 
-      <p align="center">Criacao de páginas HTML</p>
+      <p align="center">{props.descricao}</p>
 
       <div className="wrapper-img">
-        <img src={imgMore} alt="sobre"/>
+        <img src={props.img_servico} alt="sobre"/>
       </div>
 
       <footer>
           <p>
               Preço/hora
-              <strong>R$ 90.00</strong>
+              <strong>{props.preco}</strong>
           </p>
           <div className="buttons">
             <button type="button" className="editar">

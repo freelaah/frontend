@@ -30,6 +30,9 @@ const Login = () => {
             if(json.data.authorization == true && json.data.token !== null){                   
                 //salva token
                 localStorage.setItem('token', json.data.token);
+
+                //TODO: arrumar e passar por redux
+                localStorage.setItem('id_user', json.data.id_user);
                 isAutorization = true;      
             }
 

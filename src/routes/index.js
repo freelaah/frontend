@@ -7,6 +7,7 @@ import Client from '../pages/Client';
 import CalendarClient from '../pages/CalendarClient';
 import Professional from '../pages/Professional';
 import ServiceForm from '../pages/ServiceForm';
+import ServiceImagem from '../pages/Professional/imagem.js';
 import CalendarProfessional from '../pages/CalendarProfessional';
 
 function Routes() {
@@ -21,6 +22,7 @@ function Routes() {
             {/* professional */}
             <Route path="/profissional" component={Professional} exact/>
             <Route path="/profissional/servico" component={ServiceForm}/>
+            <Route path="/profissional/imagem" component={ServiceImagem}/>
             <Route path="/profissional/servicosAgendados" component={CalendarProfessional}/>
             {/* client */}
             <Route path="/cliente" component={Client} exact/>

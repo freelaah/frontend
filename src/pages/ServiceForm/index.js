@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ImageUploader from 'react-images-upload';
 import Header from '../../components/Header';
 import landing from './../../assets/images/pp.jpg';
 import './styles.css';
+
+import SelectCategories from '../../components/SelectCategories'
+
+import api from '../../services/api';
 
 const ServiceForm = () => {
 
@@ -10,19 +14,35 @@ const ServiceForm = () => {
     const [pictures, setPictures] = useState([]);
     const [categoria, setCategoria] = useState('');
 
+    const [id_user, setId_user] = useState(localStorage.getItem('id_user'));
+    const [nome, setNome] = useState('');
+    const [imageProfile, setImageProfile] = useState('');
+        
+    const [id_categoria, setId_categoria] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [preco, setPreco] = useState('');
+    const [telefone, setTelefone] = useState('');
+
+    useEffect(() => {
+        buscarProfissional();
+      }, [])  
+    
+    
     function changeType(value){
         setCategoria(value);
     }
     
     //image, descricao, categoria
-    async function cadastroCategoria() {
-        formData.append('image', pictures[0]);
-        formData.append('descricao', 'teste');
-        formData.append('categoria', 'categoria teste');
-
+    async function cadastrarServico() {
+        
+       formData.append('id_user', id_user);
+       formData.append('id_categoria', id_categoria);
+       formData.append('descricao', descricao);
+       formData.append('preco', preco);
+       formData.append('image', pictures[0]);
+       formData.append('ativo', true);
 
         try{
-            console.log('passou aqui');
             let options = {
                 method: 'POST',
                 headers: {
@@ -31,10 +51,28 @@ const ServiceForm = () => {
                 body: formData
             }
             delete options.headers['Content-Type'];
-            let retorno = await fetch('http://localhos:5000/services', options);
+            let retorno = await fetch('http://localhost:5000/services', options);
+
         } catch(error) { //em caso de erro, faça um print do erro.
             console.log(error);
         }
+
+
+    }
+
+    async function buscarProfissional(){
+        let json = null;
+        
+        try {
+            json = await api.get("/users/" + id_user);
+
+            setId_user(json.data._id);
+            setNome(json.data.nome);
+            setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`)
+
+         }catch(e){
+             console.log("erro " + e);
+         }
     }
     
     const onDrop = picture => {
@@ -46,35 +84,27 @@ const ServiceForm = () => {
             <Header title="Cadastrar Serviço" />
             <div className="service-form">
                 <header>
-                    <img src={landing} alt="nome professor"/>
+                    <img src={imageProfile} alt="nome professor"/>
                     <div>
-                        <strong>Sillas Vinícius</strong>
+                        <strong>{nome}</strong>
                     </div>
                 </header>
 
                 <section>
-                    <input id="telefone" name="telefone" type="text" placeholder="Telefone"/>
-
-                    <input id="descricaoServico" name="descricaoServico" type="text" placeholder="Descrição do serviço"/>
-
-                    <select defaultValue={categoria} id="categoria" onChange={(evt) => changeType(evt.target.value) }>
-                        <option value="" disabled hidden>Categoria</option>
-                        <option value="1">Designer de Interfaces</option>
-                        <option value="2">Programador</option>
-                        <option value="3">Cozinheiro</option>
-                        <option value="4">Pintor</option>
-                        <option value="5">Enfermeira</option>
-                        <option value="6">Professor</option>
-                    </select>
+                    <input id="telefone" name="telefone" type="text" placeholder="Telefone" onChange={(text) => setTelefone(text.target.value)}/>
+                    <input id="descricaoServico" name="descricaoServico" type="text" placeholder="Descrição do serviço" onChange={(text) => setDescricao(text.target.value)}/>
+            
+                    <SelectCategories onChange={(id) => setId_categoria(id)}/>
+                    
                     <ImageUploader
                         withIcon={true}
                         buttonText='Selecione uma imagem...'
                         onChange={onDrop}
-                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        imgExtension={['.jpg', '.jpeg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
                         buttonClassName="imageButton"
                     />   
-                    <button onClick={cadastroCategoria} className="cadService">Cadastrar Serviço</button>
+                    <button onClick={cadastrarServico} className="cadService">Cadastrar Serviço</button>
                 </section>
                 
             </div>
