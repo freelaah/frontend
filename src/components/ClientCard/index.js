@@ -1,10 +1,41 @@
-import React from 'react';
-import landing from './../../assets/images/pp.jpg';
-import imgMore from './../../assets/images/imgMore.svg';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import './styles.css';
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const ClientCard = () => {
+const ClientCard = ({img_profile, id_user, categoria_id, descricao, preco, img_servico}) => {
+
+  const [categoria, setCategoria] = useState('');
+  const [nome, setNome] = useState('');
+
+  useEffect(() => {
+    buscarCategoria(categoria_id);
+    buscarUsuario(id_user);
+  }, []); 
+
+  async function buscarCategoria(id_categoria){
+    console.log(">>>", id_categoria)
+  
+    try {
+        const json = await api.get("/categories/" + id_categoria );
+        setCategoria(json.data.nome);
+     }catch(e){
+         console.log("erro " + e);
+     }
+  }
+
+  async function buscarUsuario(id_user){
+    let json = null;
+    try {
+        json = await api.get("/users/" + id_user );
+        
+        setNome(json.data.nome);
+
+     }catch(e){
+         console.log("erro " + e);
+     }
+  }
+
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
@@ -21,27 +52,27 @@ const ClientCard = () => {
   return (
     <article className="teacher-item">
       <header>
-          <img src={landing} alt="nome professor"/>
+          <img src={img_profile} alt={nome}/>
           <div>
-              <strong>Sillas Vinícius</strong>
-              <span>Designer de interiores</span>
+              <strong>{nome}</strong>
+              <span>{categoria}</span>
           </div>
       </header>
 
-      <p align="center">fgffgdfgdfgdfgdfsfffffffffffffffffffffffffffffffsdfdsfsdfsdf</p>
+      <p align="center">{descricao}</p>
 
       <div className="wrapper-img">
-        <img src={imgMore} alt="sobre"/>
+        <img src={img_servico} alt="sobre"/>
       </div>
 
       <footer>
           <p>
               Preço/hora
-              <strong>R$ 90.00</strong>
+              <strong>R$ {preco}</strong>
           </p>
           <div className="inputBlock">
             <label htmlFor="dataServico">Data do serviço:</label>
-            <input id="dataServico" name="dataServico" type="date" className="date"min={today}/>
+            <input id="dataServico" name="dataServico" type="date" className="date" min={today}/>
           </div>
           <button type="button" id="agendar">
               Agendar

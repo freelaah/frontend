@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import Header from '../../components/Header';
 import landing from './../../assets/images/pp.jpg';
@@ -9,6 +10,13 @@ import SelectCategories from '../../components/SelectCategories'
 import api from '../../services/api';
 
 const ServiceForm = () => {
+
+    const history = useHistory();
+
+    const routeChange = (name) => {
+        let path = `/`.concat(name);
+        history.push(path); //Joga o usuario para esse path
+    }
 
     const formData = new FormData();
     const [pictures, setPictures] = useState([]);
@@ -38,7 +46,7 @@ const ServiceForm = () => {
        formData.append('id_user', id_user);
        formData.append('id_categoria', id_categoria);
        formData.append('descricao', descricao);
-       formData.append('preco', preco);
+       formData.append('preco', preco / 100);
        formData.append('image', pictures[0]);
        formData.append('ativo', true);
 
@@ -52,6 +60,7 @@ const ServiceForm = () => {
             }
             delete options.headers['Content-Type'];
             let retorno = await fetch('http://localhost:5000/services', options);
+            routeChange('profissional');
 
         } catch(error) { //em caso de erro, faça um print do erro.
             console.log(error);
@@ -68,7 +77,8 @@ const ServiceForm = () => {
 
             setId_user(json.data._id);
             setNome(json.data.nome);
-            setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`)
+            // setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`);
+            setImageProfile(`http://localhost:5000/files/avatar.png`);
 
          }catch(e){
              console.log("erro " + e);
@@ -93,6 +103,7 @@ const ServiceForm = () => {
                 <section>
                     <input id="telefone" name="telefone" type="text" placeholder="Telefone" onChange={(text) => setTelefone(text.target.value)}/>
                     <input id="descricaoServico" name="descricaoServico" type="text" placeholder="Descrição do serviço" onChange={(text) => setDescricao(text.target.value)}/>
+                    <input id="preco" name="preco" type="number" placeholder="Preço" min="1" onChange={(text) => setPreco(text.target.value)}/>
             
                     <SelectCategories onChange={(id) => setId_categoria(id)}/>
                     

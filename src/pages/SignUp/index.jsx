@@ -25,7 +25,7 @@ const SignUp = () => {
 
   const routeChange = (name) => {
     let path = `/`.concat(name);
-    history.pushState(path); //Joga o usuario para esse path
+    history.push(path); //Joga o usuario para esse path
   }
 
   
@@ -37,6 +37,7 @@ const SignUp = () => {
 
     try {
       const response = await api.post("/users/register", data);
+      routeChange('login');
    }catch(error){
        console.log("erro " + error);
    }
