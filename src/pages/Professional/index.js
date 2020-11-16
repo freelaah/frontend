@@ -19,6 +19,7 @@ const Professional = () => {
   const [loading, setLoading] = useState(false)
   const [nome, setNome] = useState('');
   const [image_profile, setImage_profile] = useState('');
+  const [categoria, setCategoria] = useState('');
   
   useEffect(() => {
     buscarTodosServicos();
@@ -41,6 +42,8 @@ const Professional = () => {
             }
          })
 
+         console.log(servicos);
+
      }catch(e){
          console.log("erro " + e);
      }
@@ -59,31 +62,19 @@ const Professional = () => {
          console.log("erro " + e);
      }
   }
-
-  async function buscarCategoria(id_categoria){
-    console.log(">>>", id_categoria)
-    
-    let json = null;
-    try {
-        json = await api.get("/categories/" + id_categoria );
-        return json.data.nome;
-     }catch(e){
-         console.log("erro " + e);
-     }
-  }
-
   
    let Select = () => <div>Carregando...</div> ;
     
     if(loading){
+
          Select = () => <>{
              servicos.map(data => 
               
               <ProfessionalCard 
                     key={data._id}
                     nome={nome}
-                    img_profile={`http://localhost:5000/files/${image_profile}`}  
-                    categoria={data.id_categoria} 
+                    img_profile={`http://localhost:5000/files/avatar.png`}  
+                    categoria_id={data.id_categoria} 
                     descricao={data.descricao}
                     preco={data.preco}
                     img_servico={`http://localhost:5000/files/${data.imgURL}`}
