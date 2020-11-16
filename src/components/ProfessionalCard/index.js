@@ -1,11 +1,27 @@
-import React from 'react';
-import landing from './../../assets/images/pp.jpg';
-import imgMore from './../../assets/images/imgMore.svg';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import editarImg from './../../assets/images/editar.svg';
 import excluirImg from './../../assets/images/excluir.svg';
 import './styles.css';
 
 const ProfessionalCard = (props) => {
+
+  const [categoria, setCategoria] = useState('');
+
+  useEffect(() => {
+    buscarCategoria(props.categoria_id);
+  }, []); 
+
+  async function buscarCategoria(id_categoria){
+    console.log(">>>", id_categoria)
+  
+    try {
+        const json = await api.get("/categories/" + id_categoria );
+        setCategoria(json.data.nome);
+     }catch(e){
+         console.log("erro " + e);
+     }
+  }
   
   return (
     <article className="teacher-item">
@@ -13,7 +29,7 @@ const ProfessionalCard = (props) => {
           <img src={props.img_profile} alt={props.nome}/>
           <div>
               <strong>{props.nome}</strong>
-              <span>{props.categoria}</span>
+              <span>{categoria}</span>
           </div>
       </header>
 
