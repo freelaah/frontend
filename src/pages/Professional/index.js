@@ -45,7 +45,7 @@ const Professional = () => {
          console.log("erro " + e);
      }
   }
-
+ 
   async function buscarUsuario(){
     let json = null;
     try {
