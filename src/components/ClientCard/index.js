@@ -3,10 +3,11 @@ import api from '../../services/api';
 import './styles.css';
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const ClientCard = ({img_profile, id_user, categoria_id, descricao, preco, img_servico}) => {
+const ClientCard = ({id_user, categoria_id, descricao, preco, img_servico}) => {
 
   const [categoria, setCategoria] = useState('');
   const [nome, setNome] = useState('');
+  const [imageProfile, setImageProfile] = useState('');
 
   useEffect(() => {
     buscarCategoria(categoria_id);
@@ -30,6 +31,7 @@ const ClientCard = ({img_profile, id_user, categoria_id, descricao, preco, img_s
         json = await api.get("/users/" + id_user );
         
         setNome(json.data.nome);
+        setImageProfile("http://localhost:5000/files/" + json.data.img_profile);
 
      }catch(e){
          console.log("erro " + e);
@@ -52,7 +54,7 @@ const ClientCard = ({img_profile, id_user, categoria_id, descricao, preco, img_s
   return (
     <article className="teacher-item">
       <header>
-          <img src={img_profile} alt={nome}/>
+          <img src={imageProfile} alt={nome}/>
           <div>
               <strong>{nome}</strong>
               <span>{categoria}</span>

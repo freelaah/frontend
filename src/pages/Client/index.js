@@ -13,6 +13,7 @@ const Client = () => {
     const [servicos, setServicos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [nome, setNome] = useState('');
+    const [imageProfile, setImageProfile] = useState('users/sem_imagem.jpg');
     const [id_user, setId_user] = useState(localStorage.getItem('id_user'));
 
     function changeType(value){
@@ -49,6 +50,7 @@ const Client = () => {
             json = await api.get("/users/" + id_user );
             
             setNome(json.data.nome);
+            setImageProfile(json.data.img_profile);
             
     
         }catch(e){
@@ -104,7 +106,6 @@ const Client = () => {
                             key={data._id} 
                             id_user={data.id_user} 
                             categoria_id={data.id_categoria}
-                            img_profile={`http://localhost:5000/files/avatar.png`}
                             descricao={data.descricao}
                             preco={data.preco}
                             img_servico={`http://localhost:5000/files/${data.imgURL}`}

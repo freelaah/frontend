@@ -12,6 +12,7 @@ const  ImagemServico = () => {
 
     openImage();
 
+    //Esse componente so esta aqui para teste para abrir imagem.
     async function openImage(){
         try {
       

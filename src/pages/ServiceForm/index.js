@@ -42,7 +42,7 @@ const ServiceForm = () => {
     
     //image, descricao, categoria
     async function cadastrarServico() {
-        
+       
        formData.append('id_user', id_user);
        formData.append('id_categoria', id_categoria);
        formData.append('descricao', descricao);
@@ -50,23 +50,13 @@ const ServiceForm = () => {
        formData.append('image', pictures[0]);
        formData.append('ativo', true);
 
-        try{
-            let options = {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin' : '*'
-                },
-                body: formData
-            }
-            delete options.headers['Content-Type'];
-            let retorno = await fetch('http://localhost:5000/services', options);
-            routeChange('profissional');
-
-        } catch(error) { //em caso de erro, faça um print do erro.
-            console.log(error);
+       try {
+           let json = await api.post("/services", formData);
+           routeChange('profissional');
+           }catch(e){
+            alert("Voce nao esta mais logado no sistema.");
+            routeChange('login');
         }
-
-
     }
 
     async function buscarProfissional(){
@@ -77,9 +67,8 @@ const ServiceForm = () => {
 
             setId_user(json.data._id);
             setNome(json.data.nome);
-            // setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`);
-            setImageProfile(`http://localhost:5000/files/avatar.png`);
-
+            //Sem imagem ele pega a imagem no back: sem_imagem.jpg
+            setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`);
          }catch(e){
              console.log("erro " + e);
          }
