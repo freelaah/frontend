@@ -22,7 +22,6 @@ const SignUp = () => {
   const history = useHistory();
 
 
-
   const routeChange = (name) => {
     let path = `/`.concat(name);
     history.push(path); //Joga o usuario para esse path
@@ -33,14 +32,14 @@ const SignUp = () => {
     
     e.preventDefault(); 
 
-    const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf };
+    const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf,  img_profile:"users/sem_imagem.jpg"};
 
     try {
       const response = await api.post("/users/register", data);
       routeChange('login');
-   }catch(error){
+    }catch(error){
        console.log("erro " + error);
-   }
+    }
 
   }
 

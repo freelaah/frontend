@@ -30,6 +30,8 @@ const Login = () => {
             if(json.data.authorization == true && json.data.token !== null){                   
                 //salva token
                 localStorage.setItem('token', json.data.token);
+                localStorage.setItem('tipo', json.data.type);
+                console.log(">>> tipo: " + json.data.type)
 
                 //TODO: arrumar e passar por redux
                 localStorage.setItem('id_user', json.data.id_user);
@@ -41,7 +43,7 @@ const Login = () => {
          }
          
          if(isAutorization) {
-             //cliente e profissional
+             //cliente ou profissional
             history.push(json.data.type);
          } else {
             setInvalidPassword(true);
