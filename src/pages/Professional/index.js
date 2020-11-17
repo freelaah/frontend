@@ -9,71 +9,60 @@ import './styles.css';
 import api from '../../services/api';
 
 const Professional = () => {
-
-  //buscar todos os servicos desse id_user
-  //buscar usuario
-  //buscar categoria
     
   const [servicos, setServicos] = useState([]);
   const [id_user, setId_user] = useState(localStorage.getItem('id_user'));
-  const [loading, setLoading] = useState(false)
   const [nome, setNome] = useState('');
   const [image_profile, setImage_profile] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
-    buscarTodosServicos();
-    buscarUsuario();
+    buscarTodosServicosPorUsuario();
   }, [])  
 
-  //TODO: alterar no back para buscar servicos só de um usuário
-  async function buscarTodosServicos(){
-    let json = null;
+  async function buscarTodosServicosPorUsuario(){
+
     try {
-        json = await api.get("/services")
+        let json = await api.get("/services/user/" + id_user);
     
         json.data.map(item =>{        
-            if(item.id_user === id_user){
-              //let categoria_nome = await buscarCategoria(item.id_categoria) 
-              servicos.push({...item}); // categoria: categoria_nome});
-              
-              //console.log(categoria_nome);
-              //servicos.push({...item});
+              setNome(item.user.nome);
+              setImage_profile(item.user.img_profile);
+              servicos.push({...item}); 
             }
-         })
-
-         console.log(servicos);
-
-     }catch(e){
-         console.log("erro " + e);
-     }
-  }
- 
-  async function buscarUsuario(){
-    let json = null;
-    try {
-        json = await api.get("/users/" + id_user );
-        
-        setNome(json.data.nome);
-        setImage_profile(json.data.img_profile);
-        setLoading(true)
+        )
+        setIsLoaded(true);
 
      }catch(e){
          console.log("erro " + e);
      }
   }
   
-   let Select = () => <div>Carregando...</div> ;
-    
-    if(loading){
+  async function deletarServico(servico_id, item){
+      console.log("vai deletar: " + servico_id + " item " + item) ;
 
-         Select = () => <>{
-             servicos.map(data => 
-              
-              <ProfessionalCard 
+      var index = servicos.indexOf(item);
+
+      api.delete(`services/${servico_id}`).then(resp => {
+        var filteredAry = servicos.filter(function(e) { return e !== item })
+        setServicos(filteredAry);
+    })
+  }
+
+   let InsetComponentRuntime = () => <div>Carregando...</div> ;
+    
+    if(isLoaded){
+
+      InsetComponentRuntime = () => <>{
+             servicos.reverse().map(data =>             
+              <ProfessionalCard
                     key={data._id}
+                    cb={deletarServico}
+                    servico_id={data._id}
+                    item={data}
                     nome={nome}
-                    img_profile={`http://localhost:5000/files/avatar.png`}  
+                    img_profile={`http://localhost:5000/files/${image_profile}`}  
                     categoria_id={data.id_categoria} 
                     descricao={data.descricao}
                     preco={data.preco}
@@ -97,7 +86,7 @@ const Professional = () => {
           </Link>
       </div>
       
-      <Select/>
+      <InsetComponentRuntime/>
       
     </>
   );
