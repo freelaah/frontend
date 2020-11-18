@@ -3,6 +3,8 @@ import api from '../../services/api';
 import editarImg from './../../assets/images/editar.svg';
 import excluirImg from './../../assets/images/excluir.svg';
 import './styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Modal , Button} from 'react-bootstrap';
 
 const ProfessionalCard = (props) => {
