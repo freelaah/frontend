@@ -9,6 +9,8 @@ import './styles.css';
 const ClientScheduleCard = (props ) => {
   
   const callback = props.cb; 
+  
+  const baseURL = api.baseURL;
 
   let txtMensagem = "Ol%C3%A1%20eu%20fiz%20uma%20reserva%20do%20seu%20servi%C3%A7o%20no%20Freelaah%20e%20gostaria%20de%20comunicar%20que.";
 
@@ -26,7 +28,7 @@ const ClientScheduleCard = (props ) => {
             <h1>Profissional:</h1>
             <hr></hr>
             <header>
-                <img src={`http://localhost:5000/files/${props.schedule.profissional.img_profile}`} alt="nome professor"/>
+                <img src={`${baseURL}/files/${props.schedule.profissional.img_profile}`} alt="nome professor"/>
                 <div>
                     <strong>{props.schedule.profissional.nome}</strong>
                     <span>{props.schedule.categoria.nome}</span>

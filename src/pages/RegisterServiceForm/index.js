@@ -12,6 +12,7 @@ import api from '../../services/api';
 const ServiceForm = () => {
 
     const history = useHistory();
+    const baseURL = api.baseURL;
 
     const routeChange = (name) => {
         let path = `/`.concat(name);
@@ -69,7 +70,7 @@ const ServiceForm = () => {
             setId_user(json.data._id);
             setNome(json.data.nome);
             //Sem imagem ele pega a imagem no back: sem_imagem.jpg
-            setImageProfile(`http://localhost:5000/files/${json.data.img_profile}`);
+            setImageProfile(`${baseURL}/files/${json.data.img_profile}`);
          }catch(e){
              console.log("erro " + e);
          }

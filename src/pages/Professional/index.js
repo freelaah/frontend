@@ -10,6 +10,9 @@ import api from '../../services/api';
 
 const Professional = () => {
     
+  const baseURL = api.baseURL;
+  console.log(">>>>" , baseURL)
+  
   const [servicos, setServicos] = useState([]);
   const [id_user, setId_user] = useState(localStorage.getItem('id_user'));
   const [nome, setNome] = useState('');
@@ -62,11 +65,11 @@ const Professional = () => {
                     servico_id={data._id}
                     item={data}
                     nome={nome}
-                    img_profile={`http://localhost:5000/files/${image_profile}`}  
+                    img_profile={`${baseURL}/files/${image_profile}`}  
                     categoria_id={data.id_categoria} 
                     descricao={data.descricao}
                     preco={data.preco}
-                    img_servico={`http://localhost:5000/files/${data.imgURL}`}
+                    img_servico={`${baseURL}/files/${data.imgURL}`}
                 />
               )
           }</>

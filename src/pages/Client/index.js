@@ -12,6 +12,8 @@ import './styles.css';
 
 const Client = () => {
 
+    const baseURL = api.baseURL;
+  
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
@@ -110,7 +112,7 @@ const Client = () => {
                             descricao={data.descricao}
                             preco={data.preco}
                             data_servico={data.data}
-                            img_servico={`http://localhost:5000/files/${data.imgURL}`}
+                            img_servico={`${baseURL}/files/${data.imgURL}`}
                         />
                     )   
                 }
