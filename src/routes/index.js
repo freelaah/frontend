@@ -6,7 +6,7 @@ import SignUp from '../pages/SignUp';
 import Client from '../pages/Client';
 import CalendarClient from '../pages/CalendarClient';
 import Professional from '../pages/Professional';
-import ServiceForm from '../pages/ServiceForm';
+import ServiceForm from '../pages/RegisterServiceForm';
 import ServiceImagem from '../pages/Professional/imagem.js';
 import CalendarProfessional from '../pages/CalendarProfessional';
 

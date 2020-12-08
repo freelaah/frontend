@@ -18,6 +18,8 @@ const SignUp = () => {
   const [perfil, setPerfil] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [telefone, setTelefone] = useState('');
+
   const [instrucaoSenha, setInstrucaoSenha] = useState('');
   const history = useHistory();
 
@@ -32,7 +34,7 @@ const SignUp = () => {
     
     e.preventDefault(); 
 
-    const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf,  img_profile:"users/sem_imagem.jpg"};
+    const data = {login: email, senha: senha, nome: nome, tipo: perfil, cpf: cpf, telefone:telefone, img_profile:"users/sem_imagem.jpg"};
 
     try {
       const response = await api.post("/users/register", data);
@@ -74,6 +76,7 @@ const SignUp = () => {
                   </select>
                   <input type="text" placeholder="E-mail" value={email} onChange={(text) => setEmail(text.target.value)}></input>
                   <input type="text" placeholder="Senha" value={senha} onChange={(text) => setSenha(text.target.value)}></input>
+                  <input id="telefone" name="telefone" type="text" placeholder="Telefone" onChange={(text) => setTelefone(text.target.value)}/>
                   <div>
                       <button onClick={(e) => sendInput(e) }  >Cadastrar</button>                        
                   </div>

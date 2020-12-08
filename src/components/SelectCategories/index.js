@@ -34,6 +34,7 @@ const SelectCategories = (props) => {
         e.preventDefault();
         //Chama a funcao Callback
         setCategoria(e.target.value);
+        console.log(">>> categoria id " + e.target.value);
         cb(e.target.value); 
     }
 
