@@ -5,58 +5,12 @@ import Header from '../../components/Header';
 import agendaImg from './../../assets/images/agenda.svg';
 import pesquisaImg from './../../assets/images/pesquisa.svg';
 
+import SelectCategories from '../../components/SelectCategories'
+
 import api from '../../services/api';
 import './styles.css';
 
 const Client = () => {
-    const [categoria, setCategoria] = useState('');
-    const [servicos, setServicos] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [nome, setNome] = useState('');
-    const [imageProfile, setImageProfile] = useState('users/sem_imagem.jpg');
-    const [id_user, setId_user] = useState(localStorage.getItem('id_user'));
-
-    function changeType(value){
-        setCategoria(value);
-    }
-
-    useEffect(() => {
-        buscarTodosServicos();
-        buscarUsuario();
-    }, [])  
-
-    async function buscarTodosServicos(){
-        let json = null;
-        try {
-            json = await api.get("/services");
-        
-            json.data.map(item => {        
-                  servicos.push({...item});
-                }
-            );
-
-             setLoading(true);
-    
-             console.log(servicos);
-    
-        }catch(e){
-             console.log("erro " + e);
-        }
-    }
-
-    async function buscarUsuario(){
-        let json = null;
-        try {
-            json = await api.get("/users/" + id_user );
-            
-            setNome(json.data.nome);
-            setImageProfile(json.data.img_profile);
-            
-    
-        }catch(e){
-             console.log("erro " + e);
-        }
-    }
 
     var today = new Date();
     var dd = today.getDate();
@@ -71,46 +25,94 @@ const Client = () => {
   
     today = yyyy+'-'+mm+'-'+dd;
 
-    if(!loading){
+    const [categoria, setCategoria] = useState('');
+    const [servicos, setServicos] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [filterData, setFilterData] = useState(today);
+    const [dataSelect, setDataSelect] = useState(''); // Usado no select
+
+    useEffect(() => {
+        buscarTodosServicos();
+        setIsLoading(true);    
+    }, []);
+
+    
+    function changeCategory(value){
+        setCategoria(value);
+    }
+
+    function bucarComFiltro(){
+        setFilterData(dataSelect);
+        buscarTodosServicos(categoria);
+    }
+
+    async function buscarTodosServicos(id_categoria){
+        let json = null;
+        try {
+            let url = (!id_categoria) ? `/services/` 
+                                      :  `/services/category/${id_categoria}`
+
+            json = await api.get(url); 
+            
+            let newArray = [];  
+            json.data.map(item => {        
+                  newArray.push({...item});
+                }
+            );
+
+            setServicos([...newArray]);
+            
+        }catch(e){
+             console.log("erro " + e);
+        }
+    }
+
+    
+    if(!isLoading){
         return <div>Carregando...</div>;
     }
     else { 
         return (
             <>
                 <Header title="Estes são os FreeLaah disponíveis." />
-                <div className="agendaButton">
+                {/* <div className="agendaButton">
+                </div> */}
+                <div className="filtros">
+
+
+                    <SelectCategories onChange={(id) => changeCategory(id)}/>
+
+                    {/* <input id="dataServico" name="dataServico" type="date" className="date" min={today}  onChange={ event => setDataSelect(event.target.value)} />                     */}
+
+                    <button type="button" className="buscar" onClick={ bucarComFiltro } >
+                        <img src={pesquisaImg}/>
+                        Buscar
+                    </button>
+
+
                     <Link to="/cliente/servicosAgendados" id="agenda">
                         <img src={agendaImg}/>
                         Serviços Agendados
                     </Link>
-                </div>
-                <div className="filtros">
-                    <select defaultValue={categoria} id="categoria" onChange={(evt) => changeType(evt.target.value) }>
-                        <option value="" disabled hidden>Categoria</option>
-                        <option value="1">Designer de Interfaces</option>
-                        <option value="2">Programador</option>
-                        <option value="3">Cozinheiro</option>
-                        <option value="4">Pintor</option>
-                        <option value="5">Enfermeira</option>
-                        <option value="6">Professor</option>
-                    </select>
-                    <input id="dataServico" name="dataServico" type="date" className="date" min={today}/>
-                    <button type="button" className="buscar">
-                        <img src={pesquisaImg}/>
-                        Buscar
-                    </button>
+                
+
+                    
                 </div>
                 {
+                    //yyyy+'-'+mm+'-'+dd;
                     servicos.map(data => 
+                        //(data.data === filterData) &&
                         <ClientCard 
-                            key={data._id} 
+                            key={data._id}
+                            id_servico={data.id} 
                             id_user={data.id_user} 
                             categoria_id={data.id_categoria}
                             descricao={data.descricao}
                             preco={data.preco}
+                            data_servico={data.data}
                             img_servico={`http://localhost:5000/files/${data.imgURL}`}
                         />
-                    )
+                    )   
                 }
                 
             </>

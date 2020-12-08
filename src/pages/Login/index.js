@@ -68,7 +68,7 @@ const Login = () => {
                 <div className="login-area">
                     <h1 className="login-title">Fazer login</h1>
                     <input className="input-teste" value={login} type="text" placeholder="E-mail" onChange={ text => {setLogin(text.target.value);} }></input>
-                    <input className="input-teste" value={password} type="text" placeholder="Senha" onChange={ text => {setPassword(text.target.value);} }></input>
+                    <input className="input-teste" value={password} type="password" placeholder="Senha" onChange={ text => {setPassword(text.target.value);} }></input>
                     <div className="login-forgot">
                         <ul>
                             <li>Lembrar-me</li>                                

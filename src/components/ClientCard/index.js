@@ -3,20 +3,35 @@ import api from '../../services/api';
 import './styles.css';
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const ClientCard = ({id_user, categoria_id, descricao, preco, img_servico}) => {
+const ClientCard = ({id_servico, id_user, categoria_id, descricao, preco, img_servico, data_servico}) => {
 
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+
+  today = yyyy+'-'+mm+'-'+dd;
+  
+  
   const [categoria, setCategoria] = useState('');
   const [nome, setNome] = useState('');
   const [imageProfile, setImageProfile] = useState('');
+  const [diaServico, setDiaServico] = useState(today);
+  const [isBtnActive, setIsBtnActive] = useState(true);
 
   useEffect(() => {
     buscarCategoria(categoria_id);
     buscarUsuario(id_user);
   }, []); 
 
+  //TODO: não precisa buscar a categoria passar por prop..
   async function buscarCategoria(id_categoria){
-    console.log(">>>", id_categoria)
-  
     try {
         const json = await api.get("/categories/" + id_categoria );
         setCategoria(json.data.nome);
@@ -24,6 +39,7 @@ const ClientCard = ({id_user, categoria_id, descricao, preco, img_servico}) => {
          console.log("erro " + e);
      }
   }
+
 
   async function buscarUsuario(id_user){
     let json = null;
@@ -38,18 +54,32 @@ const ClientCard = ({id_user, categoria_id, descricao, preco, img_servico}) => {
      }
   }
 
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
-  if(dd<10){
-          dd='0'+dd
-      } 
-      if(mm<10){
-          mm='0'+mm
-      } 
+  function formatData(data){
+    //2020-12-01
+    let arrData = data.split("-");
+    return `${arrData[2]}/${arrData[1]}/${arrData[0]}`;
+  }
 
-  today = yyyy+'-'+mm+'-'+dd;
+  
+  async function agendarServico(){
+    setIsBtnActive(false);
+
+    //let id = id_servico;
+    let id_profissional = id_user;
+    let id_cliente = localStorage.getItem('id_user');
+    let dia_servico = diaServico; //pegar o dia
+    
+    const data = {id_servico, id_profissional, dia_servico, id_cliente};
+    console.log(data);
+
+    try {
+      const response = await api.post("/schedules", data);
+      console.log(">>> gravou servico");
+    }catch(error){
+       console.log("erro " + error);
+    }
+    
+  }
 
   return (
     <article className="teacher-item">
@@ -69,16 +99,23 @@ const ClientCard = ({id_user, categoria_id, descricao, preco, img_servico}) => {
 
       <footer>
           <p>
-              Preço/hora
-              <strong>R$ {preco}</strong>
+              Preço/dia
+              <strong>R${preco}</strong>
           </p>
           <div className="inputBlock">
-            <label htmlFor="dataServico">Data do serviço:</label>
-            <input id="dataServico" name="dataServico" type="date" className="date" min={today}/>
+            <label htmlFor="dataServico">Agendar para o dia:</label>
+            {/* <h1>{formatData(data_servico)}</h1> */}
+             
+             <input id="dataServico" name="dataServico" type="date" className="date" min={today} value={diaServico} onChange={ (event) => setDiaServico(event.target.value) }/> 
+
           </div>
-          <button type="button" id="agendar">
-              Agendar
-          </button>
+          
+          {
+            (isBtnActive) && <button type="button" id="agendar" onClick={agendarServico} >
+            Agendar
+            </button>
+          }
+
       </footer>
     </article>
   );

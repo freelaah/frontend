@@ -29,28 +29,29 @@ const ServiceForm = () => {
     const [id_categoria, setId_categoria] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
-    const [telefone, setTelefone] = useState('');
+    //const [dataServico, setDataServico] = useState('');
 
     useEffect(() => {
         buscarProfissional();
       }, [])  
-    
-    
-    function changeType(value){
+        
+   /* function changeType(value){
         setCategoria(value);
-    }
+    }*/
     
     //image, descricao, categoria
     async function cadastrarServico() {
-       
+        console.log('preco', getMoney(preco));
+
        formData.append('id_user', id_user);
        formData.append('id_categoria', id_categoria);
        formData.append('descricao', descricao);
-       formData.append('preco', preco / 100);
+       formData.append('preco', getMoney(preco));
        formData.append('image', pictures[0]);
        formData.append('ativo', true);
-
-       try {
+       //formData.append('telefone', telefone); 
+    
+      try {
            let json = await api.post("/services", formData);
            routeChange('profissional');
            }catch(e){
@@ -78,6 +79,37 @@ const ServiceForm = () => {
          setPictures(picture);
     } 
 
+    //Todo: Melhorar e colocar o real R$ 20,00
+    //http://wbruno.com.br/expressao-regular/formatar-em-moeda-reais-expressao-regular-em-javascript/
+    function getMoney( str ){
+        let number = parseInt( str.replace(/[\D]+/g,'') );           
+        return  isNaN(number) ? "" : number;
+    }
+    
+    function formatReal (int) {
+        let tmp = int+'';
+        tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+        console.log(tmp);
+        return tmp;
+    }
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+  
+    today = yyyy+'-'+mm+'-'+dd;
+
+
     return (
         <div>
             <Header title="Cadastrar Serviço" />
@@ -90,11 +122,12 @@ const ServiceForm = () => {
                 </header>
 
                 <section>
-                    <input id="telefone" name="telefone" type="text" placeholder="Telefone" onChange={(text) => setTelefone(text.target.value)}/>
                     <input id="descricaoServico" name="descricaoServico" type="text" placeholder="Descrição do serviço" onChange={(text) => setDescricao(text.target.value)}/>
-                    <input id="preco" name="preco" type="number" placeholder="Preço" min="1" onChange={(text) => setPreco(text.target.value)}/>
-            
+                    <input id="preco" name="preco" type="text" placeholder="Preço" value={preco} onChange={(text) => setPreco(formatReal(getMoney(text.target.value)))}/>
+
                     <SelectCategories onChange={(id) => setId_categoria(id)}/>
+                
+                    {/* <input id="dataServico" name="dataServico" type="date" className="date" min={today} onChange={ (data) => setDataServico(data.target.value)} />    */}
                     
                     <ImageUploader
                         withIcon={true}
