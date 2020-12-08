@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
+
 import './styles.css';
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ClientCard = ({id_servico, id_user, categoria_id, descricao, preco, img_servico, data_servico}) => {
 
+  const baseURL = api.baseURL;
+  
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
@@ -47,7 +50,7 @@ const ClientCard = ({id_servico, id_user, categoria_id, descricao, preco, img_se
         json = await api.get("/users/" + id_user );
         
         setNome(json.data.nome);
-        setImageProfile("http://localhost:5000/files/" + json.data.img_profile);
+        setImageProfile(`${baseURL}/files/` + json.data.img_profile);
 
      }catch(e){
          console.log("erro " + e);
